@@ -8,23 +8,23 @@ Our team members include Wayne, Rubesh, Wazir and Ivan.
 
 ## Engineering goals
 
-Raspberry Pi and Arduino
-Waterproofed main housing
-Six thrusters (2 horizontal, 4 vertical)
-Effective depth of up to 2.4m
-Solid ballasts
+*Raspberry Pi and Arduino
+*Waterproofed main housing
+*Six thrusters (2 horizontal, 4 vertical)
+*Effective depth of up to 2.4m
+*Solid ballasts
 
 Future iterations, will contain a live video and telemetry feed. This will be chiefly managed by the Raspberry Pi. Telemetry will include sensors and navigation equipement.
 
 ### Navigation
 
-Compass
-Accelerometer
-Gyroscope
+*Compass
+*Accelerometer
+*Gyroscope
 
 ### Telemetry
 
-Video feed
-Temperature
-pH
-Oxygen sensor
+*Video feed
+*Temperature
+*pH
+*Oxygen sensor
