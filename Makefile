@@ -53,24 +53,24 @@
 VERSION = 0.1
 
 # Standard Arduino libraries it will import, e.g. LiquidCrystal:
-ARDLIBS = 
+ARDLIBS =
 
 # User-specified (in ~/sketchbook/libraries/) libraries :
-USERLIBS = 
+USERLIBS =
 
 # Libs in local directory for current project
 # uncomment value if you have libs in directories inside current project's directory
-LOCALLIBS = 
+LOCALLIBS =
 
 # Arduino model:
 # You can set this to be a string, such as uno, atmega328...
 # do 'make list' for a full list of supported models
 MODEL ?= uno
 
-# Here you can define 
+# Here you can define
 DEFINES ?=
 
-# 
+#
 TERM_SPEED ?= 115200
 
 # in case you're using an external programmer, or you want to give more options, eg:
@@ -288,7 +288,7 @@ CEXTRA= -g -Os -Wall -fno-exceptions -ffunction-sections -fdata-sections -DARDUI
 
 CFLAGS = $(CDEBUG) $(PPDEFINES) $(CDEFS) $(CINCS) -O$(OPT) $(CWARN) $(CSTANDARD) $(CEXTRA)
 CXXFLAGS = $(CDEFS) $(PPDEFINES) $(CINCS) -O$(OPT) $(CXXSTANDARD) $(CEXTRA)
-#ASFLAGS = -Wa,-adhlns=$(<:.S=.lst),-gstabs 
+#ASFLAGS = -Wa,-adhlns=$(<:.S=.lst),-gstabs
 LDFLAGS = -Os -Wl,--gc-sections -mmcu=$(MCU) -lm
 
 # Programming support using avrdude. Settings and variables.
@@ -332,7 +332,7 @@ all: applet_files build sizeafter
 test:
 	@echo CXXSRC = $(CXXSRC)
 
-build: elf hex 
+build: elf hex
 
 ifneq "$(wildcard $(TARGET).pde)" ""
 applet/$(TARGET).cpp: $(TARGET).pde
@@ -343,7 +343,7 @@ applet/$(TARGET).cpp: $(TARGET).pde
 	# plus special magic to get around the pure virtual error
 	# undefined reference to `__cxa_pure_virtual' from Print.o.
 	# Then the .cpp file will be compiled. Errors during compile will
-	# refer to this new, automatically generated, file. 
+	# refer to this new, automatically generated, file.
 	# Not the original .pde file you actually edit...
 	test -d applet || mkdir applet
 	echo '#include "$(ARDUINO_PROG_HEADER)"' > applet/$(TARGET).cpp
@@ -360,7 +360,7 @@ applet/$(TARGET).cpp: $(TARGET).ino
 	# plus special magic to get around the pure virtual error
 	# undefined reference to `__cxa_pure_virtual' from Print.o.
 	# Then the .cpp file will be compiled. Errors during compile will
-	# refer to this new, automatically generated, file. 
+	# refer to this new, automatically generated, file.
 	# Not the original .ino file you actually edit...
 	test -d applet || mkdir applet
 	echo '#include "$(ARDUINO_PROG_HEADER)"' > applet/$(TARGET).cpp
@@ -377,13 +377,13 @@ endif
 elf: applet/$(TARGET).elf
 hex: applet/$(TARGET).hex
 eep: applet/$(TARGET).eep
-lss: applet/$(TARGET).lss 
+lss: applet/$(TARGET).lss
 sym: applet/$(TARGET).sym
 
 reset:
 	$(RESET_DEVICE)
 
-# Program the device.  
+# Program the device.
 upload: applet/$(TARGET).hex
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH)
 
@@ -401,7 +401,7 @@ COFFCONVERT=$(OBJCOPY) --debugging \
     --change-section-address .data-0x800000 \
     --change-section-address .bss-0x800000 \
     --change-section-address .noinit-0x800000 \
-    --change-section-address .eeprom-0x810000 
+    --change-section-address .eeprom-0x810000
 
 coff: applet/$(TARGET).elf
 	$(COFFCONVERT) -O coff-avr applet/$(TARGET).elf $(TARGET).cof
@@ -428,10 +428,10 @@ extcoff: $(TARGET).elf
 	$(NM) -n $< > $@
 
 	# Link: create ELF output file from library.
-applet/$(TARGET).elf: applet/$(TARGET).o applet/core.a 
+applet/$(TARGET).elf: applet/$(TARGET).o applet/core.a
 	$(CC) -o $@ applet/$(TARGET).o -L. applet/core.a $(LDFLAGS)
 
-#applet/$(TARGET).elf: applet/$(TARGET).o applet/core.a 
+#applet/$(TARGET).elf: applet/$(TARGET).o applet/core.a
 #	$(CC) $(ALL_CFLAGS) -o $@ applet/$(TARGET).cpp -L. applet/core.a $(LDFLAGS)
 
 applet/core.a: $(OBJ)
@@ -439,11 +439,11 @@ applet/core.a: $(OBJ)
 
 # Compile: create object files from C++ source files.
 .cpp.o:
-	$(CXX) -c $(ALL_CXXFLAGS) $< -o $@ 
+	$(CXX) -c $(ALL_CXXFLAGS) $< -o $@
 
 # Compile: create object files from C source files.
 .c.o:
-	$(CC) -c $(ALL_CFLAGS) $< -o $@ 
+	$(CC) -c $(ALL_CFLAGS) $< -o $@
 
 
 # Compile: create assembler files from C source files.
@@ -476,7 +476,7 @@ term:
 
 tar: $(TARFILE)
 
-$(TARFILE): 
+$(TARFILE):
 	( cd .. && \
 	  tar czvf $(TARFILE) --exclude=applet --owner=root $(CWDBASE) && \
 	  mv $(TARFILE) $(CWD) && \
@@ -495,4 +495,3 @@ depend:
 	$(CC) -M -mmcu=$(MCU) $(CDEFS) $(CINCS) $(SRC) $(ASRC) >> $(MAKEFILE)
 
 .PHONY:	all build elf hex eep lss sym program coff extcoff clean depend applet_files sizebefore sizeafter
-
