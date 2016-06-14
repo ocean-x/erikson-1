@@ -8,6 +8,7 @@ A way to organize your projects would be:
   * docs - Your main documentation directory
   * schematics - these may be maintained separately on a separate Git repo or part of the same repo
   * libs - This will contain your third party libraries.
+  * test - Any test cases or code that tests parts of your system. 
     * libA - These may be maintained as third party repositories
     * libC - ...
   * license
