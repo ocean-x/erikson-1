@@ -1,4 +1,4 @@
-int keyValue[] = {0, 47, 91, 132, 546};
+int keyValue[5] = {0, 47, 91, 132, 546};
 int NUM_KEYS = 5;
 int keyInput;
 int key =- 1;
@@ -40,8 +40,18 @@ void loop() {
     }
     delay(100);
   }
-
-int getKey(unsigned int input) {
-  int k;
-  
 }
+
+int getKey(unsigned int input)
+  {
+      int k;
+      for (k = 0; k < NUM_KEYS; k++)
+      {
+        if (input < keyInput[k])
+       {
+              return k;
+          }
+     }
+         if (k >= NUM_KEYS)k = -1;  // No valid key pressed
+         return k;
+  }
