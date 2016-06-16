@@ -1,4 +1,4 @@
-int keyValue[5] = {0, 47, 91, 132, 546};
+int keyValue[5] = {0, 50, 100, 140, 550}; //actual values are closer, but rounded to nearest 10.
 int NUM_KEYS = 5;
 int keyInput;
 int key =- 1;
@@ -12,7 +12,7 @@ void setup() {
 void loop() {
   keyInput = analogRead(A0);
   digitalWrite(13, LOW);
-  Serial.println(keyInput); // Prints the value, erase later, for debugging
+  //Serial.println(keyInput); // Prints the value, erase later, for debugging
 
   key = getKey(keyInput); // record keypress
 
@@ -42,12 +42,13 @@ void loop() {
   }
 }
 
+// Converts keyInput value to key number
 int getKey(unsigned int input)
   {
       int k;
       for (k = 0; k < NUM_KEYS; k++)
       {
-        if (input < keyInput[k])
+        if (input <= keyValue[k])
        {
               return k;
           }
