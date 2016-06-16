@@ -1,3 +1,8 @@
+/*
+forward forward left forward right forward left forward
+The code contains three parts, the music, the initialisation, the keypress sensor and mapping, before
+checking if they match the predetermined path. There. A puzzle has been created. 
+*/
 #include "pitches.h"
 ​
 int melody[] = {
@@ -62,7 +67,7 @@ int thing[8] = {1,1,2,1,3,1,2,1};
 int path[8] = {0,0,0,0,0,0,0,0};
 int j = 0;
 ​
-int adc_key_val[5] ={20,50, 100, 200, 600 };
+int adc_key_val[5] ={20, 50, 100, 200, 600};
 int NUM_KEYS = 5;
 int adc_key_in;
 int key=-1;
@@ -70,7 +75,6 @@ int oldkey=-1;
 bool pass =false;
 ​
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
 }
 ​
