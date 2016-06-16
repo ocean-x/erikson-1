@@ -3,20 +3,20 @@ int NUM_KEYS = 5;
 int keyInput;
 int key =- 1;
 int oldkey =- 1;
-int pathArray[10] = {};
+int pathArray[10] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 int j = -1; // path counter
 
 void setup() {
-  pinMode(13, OUTPUT); // This is an indicator of a button press.
   Serial.begin(9600);
+  pinMode(13, OUTPUT);
 }
 
 void loop() {
-  if(sizeof(pathArray) == 40) {
+  if(pathArray[9] != -1) {
     Serial.println("TOO HIGH");
   }
-  keyInput = analogRead(A0);
   digitalWrite(13, LOW);
+  keyInput = analogRead(A0);
   //Serial.println(keyInput); // Prints the value, erase later, for debugging
 
   key = getKey(keyInput); // record keypress
@@ -27,7 +27,6 @@ void loop() {
     key = getKey(keyInput); //convert into keypress
     if (key != oldkey) {
       oldkey = key;
-      j++;
       if (key >= 0) {
         digitalWrite(13, HIGH);
         switch(key) {
@@ -44,21 +43,13 @@ void loop() {
           case 4 : Serial.println("RIGHT BUTTON PRESSED");
           pathArray[j] = 3;
           break;
-
-          Serial.println(pathArray[j]);
-
-
           }
-
+          j++;
         }
       }
     }
-
-    for (j = j; j < 5; j++) {
-  Serial.println(pathArray[j]);
   }
-    delay(100);
-}
+
 
 
 // Converts keyInput value to key number
