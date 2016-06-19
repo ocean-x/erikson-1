@@ -1,9 +1,8 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#define BACKLIGHT_PIN     3
+#define BACKLIGHT_PIN     13
 
-LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7,
-BACKLIGHT_PIN, POSITIVE);  // Set the LCD I2C address
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Set the LCD I2C address
 
 int keyValue[5] = {20, 55, 100, 200, 600}; //actual values are closer, but rounded to nearest 10.
 int NUM_KEYS = 5;
