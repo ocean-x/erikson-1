@@ -13,10 +13,10 @@ int oldkey =- 1;
 int targetArray[8] = {1,1,2,1,3,1,2,1};
 int pathArray[8] = {0,0,0,0,0,0,0,0};
 int j = 0; // path counter
-const int MOTOR_RIGHT_IN1 = 2;
-const int MOTOR_RIGHT_IN2 = 3;
-const int MOTOR_LEFT_IN3 = 4;
-const int MOTOR_LEFT_IN4 = 5;
+const int MOTOR_RIGHT_IN1 = 7;
+const int MOTOR_RIGHT_IN2 = 8;
+const int MOTOR_LEFT_IN3 = 9;
+const int MOTOR_LEFT_IN4 = 10;
 bool pass = false; // initial pass condition is false.
 
 void setup() {
@@ -32,6 +32,7 @@ void setup() {
 
   Serial.begin(9600);
   pinMode(13, OUTPUT);
+  robotForward();
 }
 
 void loop() {
@@ -125,8 +126,8 @@ bool check() {
 }
 
 /*
-1. code LCD (everything is still in serial)
-2. drive the motors (because this is still a screen puzzle, nothing moves)
+1. code LCD (everything is still in serial) DONE!
+2. drive the motors (because this is still a screen puzzle, nothing moves) DONE! (left motor spoilt)
 3. build the fucking robot (but athena is overseas)
 */
 
