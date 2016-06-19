@@ -12,7 +12,10 @@ Our team members include Wayne, Rubesh, Wazir and Ivan.
 * Waterproofed main housing
 * Six thrusters (2 horizontal, 4 vertical)
 * Effective depth of up to 2.4m
+* Effective range of up to 15m
 * Solid ballasts
+
+This iteration will be controlled by a Raspberry Pi acting as the 'host' computer, with the Arduino acting as the motor controller. The CAT5 tether connecting the ROV to the base station is 15m long. 
 
 Future iterations, will contain a live video and telemetry feed. This will be chiefly managed by the Raspberry Pi. Telemetry will include sensors and navigation equipement.
 
