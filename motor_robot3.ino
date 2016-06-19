@@ -126,8 +126,8 @@ bool check() {
 }
 
 /*
-1. code LCD (everything is still in serial) DONE!
-2. drive the motors (because this is still a screen puzzle, nothing moves) DONE! (left motor spoilt)
+1. code LCD (everything is still in serial)
+2. drive the motors (because this is still a screen puzzle, nothing moves)
 3. build the fucking robot (but athena is overseas)
 */
 
