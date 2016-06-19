@@ -1,4 +1,11 @@
-int keyValue[5] = {0, 50, 100, 140, 550}; //actual values are closer, but rounded to nearest 10.
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#define BACKLIGHT_PIN     3
+
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7,
+BACKLIGHT_PIN, POSITIVE);  // Set the LCD I2C address
+
+int keyValue[5] = {20, 55, 100, 200, 600}; //actual values are closer, but rounded to nearest 10.
 int NUM_KEYS = 5;
 int keyInput;
 int key =- 1;
@@ -9,12 +16,22 @@ int j = 0; // path counter
 bool pass = false; // initial pass condition is false.
 
 void setup() {
+  // Switch on the backlight
+  pinMode ( BACKLIGHT_PIN, OUTPUT );
+  digitalWrite ( BACKLIGHT_PIN, HIGH );
+
+  lcd.begin(16,2);
+  lcd.home ();
+  lcd.print("Hello, ARDUINO ");
+  lcd.setCursor (0,1);
+  lcd.print ("This is an LCD");
+
   Serial.begin(9600);
   pinMode(13, OUTPUT);
 }
 
 void loop() {
-  if (pathArray[7] != 0) {
+  if (pathArray[7] != 0 && pathArray[7] == 2 || pathArray[7] == 3) {
     Serial.println("You've ran out of spaces!"); //player has ran out of possible moves
   }
   digitalWrite(13, LOW);
@@ -75,7 +92,7 @@ int getKey(unsigned int input)
       int k;
       for (k = 0; k < NUM_KEYS; k++)
       {
-        if (input <= keyValue[k])
+        if (input < keyValue[k])
        {
               return k;
           }
@@ -95,3 +112,9 @@ bool check() {
   Serial.println("Yay! Congratulations, the clue to your next puzzle is: ");
   return true;
 }
+
+/*
+1. code LCD (everything is still in serial)
+2. drive the motors (because this is still a screen puzzle, nothing moves)
+3. build the fucking robot (but athena is overseas)
+*/
