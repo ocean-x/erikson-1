@@ -26,9 +26,9 @@ void setup() {
 
   lcd.begin(16,2);
   lcd.home ();
-  lcd.print("Hello, ARDUINO ");
+  lcd.print("Hello, PLAYER 1");
   lcd.setCursor (0,1);
-  lcd.print ("This is an LCD");
+  lcd.print ("This is a puzzle");
 
   Serial.begin(9600);
   pinMode(13, OUTPUT);
@@ -37,7 +37,9 @@ void setup() {
 
 void loop() {
   if (pathArray[7] != 0 && pathArray[7] == 2 || pathArray[7] == 3) {
-    Serial.println("You've ran out of spaces!"); //player has ran out of possible moves
+    Serial.println("You're out of spaces!"); //player has ran out of possible moves
+    lcd.clear();
+    lcd.print("Out of spaces!");
   }
   digitalWrite(13, LOW);
   keyInput = analogRead(0);
@@ -58,6 +60,7 @@ void loop() {
           case 0 : Serial.println("ENTER BUTTON PRESSED");
                    pass = check();
                    tone(10, 4000, 200);
+
           break;
           case 1 : Serial.println("RESET BUTTON PRESSED");
                    int k;
@@ -66,21 +69,31 @@ void loop() {
                    }
                    j = 0;
                    tone(10, 4000, 200);
+                   lcd.clear();
+                   lcd.print("RESET");
+                   lcd.setCursor (0,1);
+                   lcd.print ("This is a puzzle");
           break;
           case 2 : Serial.println("LEFT BUTTON PRESSED");
                    pathArray[j] = 2;
                    j++;
                    tone(10, 4000, 200);
+                   lcd.clear();
+                   lcd.print("LEFT");
           break;
           case 3 : Serial.println("FORWARD BUTTON PRESSED");
                    pathArray[j] = 1;
                    j++;
                    tone(10, 4000, 200);
+                   lcd.clear();
+                   lcd.print("FORWARD");
           break;
           case 4 : Serial.println("RIGHT BUTTON PRESSED");
                    pathArray[j] = 3;
                    j++;
                    tone(10, 4000, 200);
+                   lcd.clear();
+                   lcd.print("RIGHT");
           break;
           }
 
@@ -118,11 +131,21 @@ bool check() {
   for (k = 0; k <8; k++) {
     if (targetArray[k] != pathArray[k]) {
       Serial.println("You've got it wrong, try again?");
+      lcd.clear();
+      lcd.print("WRONG, TRY AGAIN?");
+      lcd.setCursor (0,1);
+      lcd.print ("PRESS RESET");
       return false;
+      delay(2000);
     }
   }
   Serial.println("Yay! Congratulations, the clue to your next puzzle is: ");
+  lcd.clear();
+  lcd.print("CONGRATULATIONS!");
+  lcd.setCursor (0,1);
+  lcd.print ("NEXT CODE: 1234");
   return true;
+  delay(2000);
 }
 
 /*
