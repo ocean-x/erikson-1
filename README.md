@@ -44,4 +44,5 @@ Future iterations, will contain a live video, telemetry feed, and safety measure
 * Motion sensor - For detection of unintentional motion due to currents, debris, etc, by utilizind the accelerometer.
 
 
-We hope that future versions will be able to include more sophisticated technologies such as GPS, leak detection, and fluid ballasts.
+
+We hope that future versions will be able to include more sophisticated technologies such as GPS and fluid ballasts.
