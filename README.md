@@ -29,7 +29,9 @@ Future iterations, will contain a live video and telemetry feed. This will be ch
 
 * Video feed
 * Temperature
-* pH
+* pH sensor
 * Oxygen sensor
+* Salinity sensor
+* Alcohol sensor (possibly)
 
 We hope that future versions will be able to include more sophisticated technologies such as GPS, leak detection, and fluid ballasts.
