@@ -17,7 +17,7 @@ Our team members include Wayne, Rubesh, Wazir and Ivan.
 
 This iteration will be controlled by a Raspberry Pi acting as the 'host' computer, with the Arduino acting as the motor controller. The CAT5 tether connecting the ROV to the base station is 15m long. 
 
-Future iterations, will contain a live video and telemetry feed. This will be chiefly managed by the Raspberry Pi. Telemetry will include sensors and navigation equipement.
+Future iterations, will contain a live video, telemetry feed, and safety measures. This will be chiefly managed by the Raspberry Pi. Telemetry will include sensors and navigation equipment. Safety measures will include devices which address safety concerns.
 
 ### Navigation
 
@@ -29,7 +29,20 @@ Future iterations, will contain a live video and telemetry feed. This will be ch
 
 * Video feed
 * Temperature
-* pH
+* pH sensor
 * Oxygen sensor
+* Salinity sensor
+* Alcohol sensor (possibly)
 
-We hope that future versions will be able to include more sophisticated technologies such as GPS, leak detection, and fluid ballasts.
+### Safety Measures
+
+* Chamber pressure sensor - For detection of air leakage through faulty waterproofing mechanisms
+* Chamber temperature sensor - For detection of malfunctioning/overheating components due to possible short-circuits.
+* Chamber water sensor - For detection of water penetration in the chamber due to a complete failure of water proofing mechanisms.
+* Impact sensor - For detection of collisions and hard debris.
+* Data connection sensor - For detection of CAT5 disconnection.
+* Motion sensor - For detection of unintentional motion due to currents, debris, etc, by utilizing the accelerometer.
+
+
+
+We hope that future versions will be able to include more sophisticated technologies such as GPS and fluid ballasts.
