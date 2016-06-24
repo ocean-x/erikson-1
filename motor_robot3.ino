@@ -1,4 +1,5 @@
 #include <Wire.h>
+#include <Servo.h>
 #include <LiquidCrystal_I2C.h>
 #define BACKLIGHT_PIN     13
 #define ROTATION_SPEED 150
@@ -17,12 +18,25 @@ const int MOTOR_RIGHT_IN1 = 7;
 const int MOTOR_RIGHT_IN2 = 8;
 const int MOTOR_LEFT_IN3 = 9;
 const int MOTOR_LEFT_IN4 = 10;
+
+const int ULTRASONIC_TRIGGER = 6;
+const int ULTRASONIC_ECHO = 5;
+const int SERVO_PIN = 4;
+
+const int LIMIT_SWITCH_LEFT = 11;
+const int LIMIT_SWITCH_RIGHT = 12;
+
+Servo distanceServo;
 bool pass = false; // initial pass condition is false.
 
 void setup() {
   // Switch on the backlight
   pinMode ( BACKLIGHT_PIN, OUTPUT );
   digitalWrite ( BACKLIGHT_PIN, HIGH );
+
+  pinMode(SERVO_PIN, OUTPUT); // so the damn thing can run around
+  pinMode(ULTRASONIC_TRIGGER, OUTPUT);
+  pinMode(ULTRASONIC_ECHO, INPUT);
 
   lcd.begin(16,2);
   lcd.home ();
@@ -32,10 +46,13 @@ void setup() {
 
   Serial.begin(9600);
   pinMode(13, OUTPUT);
-  robotForward(); //testing
+  distanceServo.attach(SERVO_PIN);
 }
 
 void loop() {
+  int left_bumper = digitalRead(LIMIT_SWITCH_LEFT);
+  int right_bumper = digitalRead(LIMIT_SWITCH_RIGHT);
+  move();
   if (pathArray[7] != 0 && pathArray[7] == 2 || pathArray[7] == 3) {
     Serial.println("You're out of spaces!"); //player has ran out of possible moves
     lcd.clear();
@@ -103,11 +120,24 @@ void loop() {
   }
 
 void move() {
-  for(int i=0;i<8;i++) {
+  if (left_bumper || right_bumper) {
+    robotStop();
+    delay(500);
+    robotBack();
+    delay(2000);
+    robotStop();
+    int angle = sweepForBestAngle();
+    angle = angle - 90;
+    robotRotateLeft(angle);
+    robotForward();
+  }
+  /*for(int i=0;i<8;i++) {
     if(targetArray[i] == 1) robotForward();
     else if(targetArray[i] == 2) robotRotateLeft();
     else if(targetArray[i] == 3) robotRotateRight();
+
   }
+  */
 }
 
 
@@ -161,7 +191,7 @@ bool check() {
 /**************************************************/
 
 
-/*int sweepForBestAngle() {
+  int sweepForBestAngle() {
   int pos;
   int bestDistance = 0;
   int bestAngle = 0;
@@ -185,7 +215,7 @@ bool check() {
 
   distanceServo.write(bestAngle);
   delay(240);
-}*/
+}
 
 void robotRotateLeft() {
   digitalWrite(MOTOR_RIGHT_IN1, HIGH);
