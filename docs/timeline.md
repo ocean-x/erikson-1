@@ -1,6 +1,6 @@
-Submission - Week 5
-34 days remaining
-CA2 - Week 8
+# Submission - Week 5
+##34 days remaining
+##CA2 - Week 8
 
 Week 1/ 27th June - External Hardware
 - Order all motors, sensors, camera, dome
