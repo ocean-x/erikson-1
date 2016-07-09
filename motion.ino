@@ -7,6 +7,10 @@ unsigned long lastStreamTime = 0; //store last steamed time stamp
 const int streamPeriod = 40; //stream at 25Hz. period time is inversely proportional to frequency (1000/40)
 bool upDateSensorData = true;
 
+Servo esc;
+const int control = 3;
+const int motor = 5;
+
 void setup() {
   Serial.begin(112500);
   I2C.begin();
@@ -31,12 +35,16 @@ void setup() {
   delay(1000);	//Wait for a second
   Serial.println("1...");
   delay(1000);	//Wait for a second
+
+  esc.attach(motor);
 }
 
 
 }
 
 void loop() {
+  // TODO: add magnetic data and find a way to meaningfully display on the RPi
+
   if (updateSensorData)  //Keep the updating of data as a separate task
   {
     mySensor.updateAccel();        //Update the Accelerometer data
@@ -45,7 +53,7 @@ void loop() {
     mySensor.updateCalibStatus();  //Update the Calibration Status
     updateSensorData = false;
   }
-  
+
   if ((millis() - lastStreamTime) >= streamPeriod) {
 
     lastStreamTime = millis();
@@ -97,5 +105,9 @@ void loop() {
 
     updateSensorData = true;
   }
+
+  int throttle = analogRead(control);
+  throttle = map(throttle, 0, 1023, 0, 179);
+  esc.write(throttle);
 
 }
