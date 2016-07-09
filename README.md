@@ -17,7 +17,7 @@ Our team members include Wayne, Rubesh, Wazir and Ivan.
 
 This iteration will be controlled by a Raspberry Pi acting as the 'host' computer, with the Arduino acting as the motor controller. The CAT5 tether connecting the ROV to the base station is 15m long. 
 
-Future iterations, will contain a live video, telemetry feed, and safety measures. This will be chiefly managed by the Raspberry Pi. Telemetry will include sensors and navigation equipment. Safety measures will include devices which address safety concerns.
+Future iterations, will contain a live video, telemetry feed, and safety measures. This will be managed by the Raspberry Pi. Telemetry will include sensors and navigation equipment. Safety measures will include devices which address safety concerns.
 
 ### Navigation
 
@@ -31,7 +31,7 @@ Future iterations, will contain a live video, telemetry feed, and safety measure
 * Temperature
 * pH sensor
 * Oxygen sensor
-* Salinity sensor
+* Salinity sensor (possibly)
 * Alcohol sensor (possibly)
 
 ### Safety Measures
@@ -46,3 +46,5 @@ Future iterations, will contain a live video, telemetry feed, and safety measure
 
 
 We hope that future versions will be able to include more sophisticated technologies such as GPS and fluid ballasts.
+
+If the tether, which provides a variable weight at the rear, is removed, the submarine would have improved movement and stability. The addition of a depth sensor would allow the submarine to descend and hold set depth and avoid constant manual adjustments to hold a constant depth.
