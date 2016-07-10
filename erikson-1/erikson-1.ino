@@ -8,6 +8,13 @@ Z Axis pointing down
 Positive pitch: nose up
 Positive roll: right wing down
 Positive yaw: clockwise
+
+TODO: Program motion functions
+			Add sensor code (once it's been debugged in a separate sketch)
+			Start coding Python script
+			Test sensors and add them to the main sketch
+			Do we want leak detection or not?
+
 */
 
 //libraries
@@ -39,7 +46,6 @@ boolean lightEnable = false;
 
 void setup() {
 	Serial.begin(112500);
-	I2C.begin();
 
 	//led on
 	pinMode(lightPin, OUTPUT);
@@ -53,6 +59,19 @@ void setup() {
 	ESC_RIGHT_BACK_VERT.attach(ESC_RIGHT_BACK_VERT_PIN, 1000, 2000);
 	stopALL();
 
+	Serial.println("OCEANX CONTROL SYSTEM");
+	Serial.println("Please place ROV on a flat surface");
+	delay(1000);
+
+	I2C.begin(); //for the 9-axis motion sensor?
+	delay(2000);
+
+	/*
+	Initialise the three sensors here
+
+	*/
+	delay(30);
+
 
 
 }
@@ -61,6 +80,41 @@ void loop() {
 
 }
 
+
+void forward() {
+
+}
+
+void backward() {
+
+}
+
+void ascend() {
+
+}
+
+void descend() {
+
+}
+
+void turnLeft() {
+
+}
+
+void turnRight() {
+
+}
+
+void tiltUp() {
+
+}
+
+void tiltDown() {
+
+}
+
+//this function stops all motors
 void stopALL() {
-	
+	Serial.println("STOPPING ALL MOTORS!");
+
 }
