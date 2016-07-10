@@ -1,5 +1,5 @@
 /*
-OCEANX CONTROL SYSTEM
+OCEANX CONTROL SYSTEM –
 Tested with Arduino Mega 2560
 
 X Axis pointing forward
@@ -14,6 +14,7 @@ TODO: Program motion functions
 			Start coding Python script
 			Test sensors and add them to the main sketch
 			Do we want leak detection or not?
+			Yes let's start by creating a python file
 
 */
 
@@ -79,19 +80,25 @@ void setup() {
 	for (int y = 0; y < 6; y++)
 		Serial.println(AN_OFFSET[y]);
 	delay(1000);
-	digitalWrite(lightPin, LOW);
-	Serial.println("");
-	Serial.println("");
-	Serial.println("");
-	Serial.println("");
-	Serial.println("");
-	Serial.println("");
-	Serial.println("");
-	Serial.println("");
-	Serial.println("");
+	digitalWrite(lightPin, LOW); //turning the light off becuase we've tested it I guess?
+
+	//displaying the keyboard mappings
+	Serial.println("Welcome to OceanX!");
+	Serial.println("Enter a command!");
+	Serial.println("Keyboard (Xbox controller functionality will come later):");
+	Serial.println("I - Ascend");
+	Serial.println("K - Descend");
+	Serial.println("W - Forward");
+	Serial.println("A – Rotate Left");
+	Serial.println("S – Backward");
+	Serial.println("D – Rotate Right");
+	Serial.println("X – Stop");
+	Serial.println("T – Tilt Up");
+	Serial.println("G – Tilt Down");
+	Serial.println("L – Toggle Lights");
 	delay(1000); // another pause
 
-	timer = millis(); 
+	timer = millis(); //remember to declare that such a thing exists
 	delay(20);
 	counter = 0;
 
