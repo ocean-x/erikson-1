@@ -71,7 +71,29 @@ void setup() {
 
 	*/
 	delay(30);
+	/*
+	Take some readings and offset the values here
 
+	*/
+	Serial.println("Offset: ");
+	for (int y = 0; y < 6; y++)
+		Serial.println(AN_OFFSET[y]);
+	delay(1000);
+	digitalWrite(lightPin, LOW);
+	Serial.println("");
+	Serial.println("");
+	Serial.println("");
+	Serial.println("");
+	Serial.println("");
+	Serial.println("");
+	Serial.println("");
+	Serial.println("");
+	Serial.println("");
+	delay(1000); // another pause
+
+	timer = millis(); 
+	delay(20);
+	counter = 0;
 
 
 }
