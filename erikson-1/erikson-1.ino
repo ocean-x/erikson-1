@@ -89,9 +89,6 @@ void setup() {
 	Serial.println("L – Toggle Lights");
 	delay(1000); // another pause
 
-	timer = millis(); //remember to declare that such a thing exists
-	delay(20);
-	counter = 0;
 
 	//initialise the three sensors here
 	ROVSensor.initSensor();
@@ -124,10 +121,26 @@ void setup() {
 	delay(20);
 	counter = 0;
 
-
 }
 
+int go_l;
+int go_r;
+char key; //keyboard
+
 void loop() {
+
+	//reading keyboard
+	while (Serial.available()) {
+		delay(1);
+		key = (char)Serial.read();
+		switch (key) {
+
+			case ('d') : descend();
+				Serial.println("Descend");
+				break;
+
+		}
+	}
 
 }
 
