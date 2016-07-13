@@ -135,8 +135,42 @@ void loop() {
 		key = (char)Serial.read();
 		switch (key) {
 
-			case ('d') : descend();
-				Serial.println("Descend");
+			case 'k' : descend();
+				Serial.println("Descending");
+				break;
+
+			case 'i' : ascend();
+				Serial.println("Ascending");
+				break;
+
+			case 'w' : forward();
+				Serial.println("Moving forward");
+				break;
+
+			case 's' : backward();
+				Serial.println("Moving backward");
+				break;
+
+			case 'a' : turnLeft();
+				Serial.println("Turning left");
+				break;
+
+			case 'd' : turnRight();
+				Serial.println("Turning right");
+				break;
+
+			case 'i' : toggleLights();
+				break;
+
+			case 's' : stopALL();
+				break;
+
+			case 't' : tiltUp();
+				Serial.println("Tiling up");
+				break;
+
+			case 'g' : tiltDown();
+				Serial.println("Tilting down");
 				break;
 
 		}
@@ -174,6 +208,10 @@ void tiltUp() {
 }
 
 void tiltDown() {
+
+}
+
+void toggleLights() {
 
 }
 
