@@ -52,7 +52,7 @@ const int pHPin = 5;
 boolean lightEnable = false;
 
 void setup() {
-	Serial.begin(112500);
+	Serial.begin(115200);
 
 	//led on
 	pinMode(lightPin, OUTPUT);
@@ -118,7 +118,7 @@ void setup() {
 
 	digitalWrite(lightPin, LOW); //turning the light off becuase we've tested it I guess?
 
-	
+
 
 	timer = millis(); //remember to declare that such a thing exists
 	delay(20);
