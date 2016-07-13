@@ -31,6 +31,12 @@ Servo ESC_LEFT_BACK_VERT;
 Servo ESC_RIGHT_FRONT_VERT;
 Servo ESC_RIGHT_BACK_VERT;
 
+//sensor stuff
+NAxisMotion ROVSensor;
+unsigned long lastStreamTime = 0;
+const int streamPeriod = 40; //stream at 25Hz, which is 1000/40
+bool updateSensorData = true;
+
 //pin assignments: motors, lights, sensors
 const int ESC_LEFT_HORIZ_PIN = 5;
 const int ESC_LEFT_FRONT_VERT_PIN = 6;
@@ -67,21 +73,6 @@ void setup() {
 	I2C.begin(); //for the 9-axis motion sensor?
 	delay(2000);
 
-	/*
-	Initialise the three sensors here
-
-	*/
-	delay(30);
-	/*
-	Take some readings and offset the values here
-
-	*/
-	Serial.println("Offset: ");
-	for (int y = 0; y < 6; y++)
-		Serial.println(AN_OFFSET[y]);
-	delay(1000);
-	digitalWrite(lightPin, LOW); //turning the light off becuase we've tested it I guess?
-
 	//displaying the keyboard mappings
 	Serial.println("Welcome to OceanX!");
 	Serial.println("Enter a command!");
@@ -97,6 +88,37 @@ void setup() {
 	Serial.println("G – Tilt Down");
 	Serial.println("L – Toggle Lights");
 	delay(1000); // another pause
+
+	timer = millis(); //remember to declare that such a thing exists
+	delay(20);
+	counter = 0;
+
+	//initialise the three sensors here
+	ROVSensor.initSensor();
+	ROVSensor.setOperationMode(OPERATION_MODE_NDOF); // or 0x0C, can be set to debug
+	ROVSensor.setUpdateMode(MANUAL); //default is auto, manual has to update function before read function
+	//manual has lesser reads to sensor
+	mySensor.updateAccelConfig();
+  updateSensorData = true;
+  Serial.println();
+  Serial.println("Default accelerometer configuration settings...");
+  Serial.print("Range: ");
+  Serial.println(mySensor.readAccelRange());
+  Serial.print("Bandwidth: ");
+  Serial.println(mySensor.readAccelBandwidth());
+  Serial.print("Power Mode: ");
+  Serial.println(mySensor.readAccelPowerMode());
+  Serial.println("Streaming in ...");	//Countdown
+  Serial.print("3...");
+  delay(1000);	//Wait for a second
+  Serial.print("2...");
+  delay(1000);	//Wait for a second
+  Serial.println("1...");
+  delay(1000);	//Wait for a second
+
+	digitalWrite(lightPin, LOW); //turning the light off becuase we've tested it I guess?
+
+	
 
 	timer = millis(); //remember to declare that such a thing exists
 	delay(20);
