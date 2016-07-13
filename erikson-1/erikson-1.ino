@@ -212,6 +212,16 @@ void tiltDown() {
 }
 
 void toggleLights() {
+	switch (lightEnable) {
+		case true : digitalWrite(lightPin, LOW);
+			Serial.println("Lights off");
+			lightEnable = false;
+			break;
+		case false : digitalWrite(lightPin, HIGH);
+			Serial.println("Lights on");
+			lightEnable = true;
+			break;
+	}
 
 }
 
