@@ -275,15 +275,15 @@ void ascend() {
     ESC_RIGHT_FRONT_VERT.write(70);
     ESC_LEFT_BACK_VERT.write(72);
     ESC_RIGHT_BACK_VERT.write(73);
-    ESC_LEFT_HORIZ.write(STOP_MOTOR);
-    ESC_RIGHT_HORIZ.write(STOP_MOTOR);
+    ESC_LEFT_HORIZ.write(stopMotor);
+    ESC_RIGHT_HORIZ.write(stopMotor);
 	} else {
 		ESC_LEFT_FRONT_VERT.write(83);
     ESC_RIGHT_FRONT_VERT.write(80);
     ESC_LEFT_BACK_VERT.write(82);
     ESC_RIGHT_BACK_VERT.write(83);
-    ESC_LEFT_HORIZ.write(STOP_MOTOR);
-    ESC_RIGHT_HORIZ.write(STOP_MOTOR);
+    ESC_LEFT_HORIZ.write(stopMotor);
+    ESC_RIGHT_HORIZ.write(stopMotor);
     state = 'a';
 	}
 
@@ -314,24 +314,24 @@ void turnRight() {
 }
 
 void tiltUp() {
-	ESC_LEFT_HORIZ.write(STOP_MOTOR);
-  ESC_RIGHT_HORIZ.write(STOP_MOTOR);
+	ESC_LEFT_HORIZ.write(stopMotor);
+  ESC_RIGHT_HORIZ.write(stopMotor);
 
   ESC_LEFT_FRONT_VERT.write(70);
   ESC_RIGHT_FRONT_VERT.write(70);
-  ESC_LEFT_BACK_VERT.write(STOP_MOTOR);
-  ESC_RIGHT_BACK_VERT.write(STOP_MOTOR);
+  ESC_LEFT_BACK_VERT.write(stopMotor);
+  ESC_RIGHT_BACK_VERT.write(stopMotor);
 
 }
 
 void tiltDown() {
-	ESC_LEFT_HORIZ.write(STOP_MOTOR);
-  ESC_RIGHT_HORIZ.write(STOP_MOTOR);
+	ESC_LEFT_HORIZ.write(stopMotor);
+  ESC_RIGHT_HORIZ.write(stopMotor);
 
   ESC_LEFT_FRONT_VERT.write(115);
   ESC_RIGHT_FRONT_VERT.write(115);
-  ESC_LEFT_BACK_VERT.write(STOP_MOTOR);
-  ESC_RIGHT_BACK_VERT.write(STOP_MOTOR);
+  ESC_LEFT_BACK_VERT.write(stopMotor);
+  ESC_RIGHT_BACK_VERT.write(stopMotor);
 
 }
 
@@ -352,6 +352,16 @@ void toggleLights() {
 //this function stops all motors
 void stopALL() {
 	Serial.println("STOPPING ALL MOTORS!");
+	state='n';
+  go_l=113;
+  go_r=113;
+  ESC_LEFT_HORIZ.write(stopMotor);
+  ESC_RIGHT_HORIZ.write(stopMotor);
+
+  ESC_LEFT_FRONT_VERT.write(stopMotor);
+  ESC_RIGHT_FRONT_VERT.write(stopMotor);
+  ESC_LEFT_BACK_VERT.write(stopMotor);
+  ESC_RIGHT_BACK_VERT.write(stopMotor);
 
 }
 
@@ -369,4 +379,8 @@ void detectWater() {
 
 void detectTemperature() {
 	templevel = analogRead(tempdetectPin);
+}
+
+void detectPH() {
+
 }
