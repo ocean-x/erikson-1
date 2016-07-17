@@ -56,6 +56,18 @@ const int waterdetectPin = 3;
 const int pressurePin =4;
 const int internaltemperaturePin = 2;
 
+
+// may need tweaking
+// depending on choice of ESC TODO
+int LFstop = 93;
+int stopMotor = 96;
+
+int turningSpeed = 25;
+int forwardSpeedIncrement = 5;
+int speedIncrement = 2;
+int speedAdjustment = 1;
+int speedDecrease = 1;
+
 long timer = 0; //general purpose timer
 int state = ' ';
 int waterlevel = 0; //for waterDetect
