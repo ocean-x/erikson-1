@@ -47,7 +47,7 @@ const int ESC_RIGHT_FRONT_VERT_PIN = 9;
 const int ESC_RIGHT_BACK_VERT_PIN = 10;
 
 const int lightPin = 3;
-const int tempPin = 4;
+const int tempdetectPin = 4;
 const int pHPin = 5;
 boolean lightEnable = false;
 
@@ -70,6 +70,7 @@ int speedDecrease = 1;
 long timer = 0; //general purpose timer
 int state = ' ';
 int waterlevel = 0; //for waterDetect
+int templevel = 0;
 
 void setup() {
 	Serial.begin(115200);
@@ -268,15 +269,41 @@ void descend() {
 
 }
 
-void descend() {
+void ascend() {
+	if (state == 'a') {
+		ESC_LEFT_FRONT_VERT.write(73);
+    ESC_RIGHT_FRONT_VERT.write(70);
+    ESC_LEFT_BACK_VERT.write(72);
+    ESC_RIGHT_BACK_VERT.write(73);
+    ESC_LEFT_HORIZ.write(STOP_MOTOR);
+    ESC_RIGHT_HORIZ.write(STOP_MOTOR);
+	} else {
+		ESC_LEFT_FRONT_VERT.write(83);
+    ESC_RIGHT_FRONT_VERT.write(80);
+    ESC_LEFT_BACK_VERT.write(82);
+    ESC_RIGHT_BACK_VERT.write(83);
+    ESC_LEFT_HORIZ.write(STOP_MOTOR);
+    ESC_RIGHT_HORIZ.write(STOP_MOTOR);
+    state = 'a';
+	}
 
 }
 
 void turnLeft() {
+	if (state == 'a') {
+
+	} else {
+
+	}
 
 }
 
 void turnRight() {
+	if (state == 'd') {
+
+	} else {
+		
+	}
 
 }
 
@@ -313,9 +340,13 @@ void detectWater() {
 	if (waterlevel > 400) { // judgement variable for water detection
 		digitalWrite(lightPin, HIGH);
 		ascend();
-		Serial.prinln("LEAK DETECTED! ABORTING.")
+		Serial.println("LEAK DETECTED! ABORTING.")
 	} else {
 		delay(100);
 	}
 
+}
+
+void detectTemperature() {
+	templevel = analogRead(tempdetectPin);
 }
