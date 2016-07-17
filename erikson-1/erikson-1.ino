@@ -59,7 +59,6 @@ const int internaltemperaturePin = 2;
 
 // may need tweaking
 // depending on choice of ESC TODO
-int LFstop = 93;
 int stopMotor = 96;
 
 int turningSpeed = 25;
@@ -229,7 +228,7 @@ void backward() {
 	if (state == 's') {
     go_l = go_l - horizontalSpeedIncrement;
 		go_r = go_r - horizontalSpeedIncrement;
-		//ESC_LEFT_BACK_VERT.write(LFstop);
+		//ESC_LEFT_BACK_VERT.write(stopMotor);
 		//ESC_LEFT_FRONT_VERT.write(stopMotor);
 		//ESC_RIGHT_BACK_VERT(stopMotor);
 		//ESC_RIGHT_FRONT_VERT(stopMotor);
@@ -238,18 +237,34 @@ void backward() {
 	} else {
 		go_l = 78; // CALIBRATE!!!
 		go_r = 81; // TODO
-		//ESC_LEFT_BACK_VERT.write(LFstop);
+		//ESC_LEFT_BACK_VERT.write(stopMotor);
 		//ESC_LEFT_FRONT_VERT.write(stopMotor);
 		//ESC_RIGHT_BACK_VERT(stopMotor);
 		//ESC_RIGHT_FRONT_VERT(stopMotor);
 		ESC_LEFT_HORIZ.write(go_l);
 		ESC_LEFT_HORIZ.write(go_r);
-		state = 's';	
+		state = 's';
 	}
 
 }
 
-void ascend() {
+void descend() {
+	if (state == 'k') {
+    ESC_RIGHT_FRONT_VERT.write(115);
+		ESC_LEFT_FRONT_VERT.write(115);
+		ESC_RIGHT_BACK_VERT.write(115);
+		ESC_LEFT_BACK_VERT.write(115);
+		ESC_RIGHT_HORIZ.write(stopMotor);
+		ESC_LEFT_HORIZ.write(stopMotor);
+	} else {
+		ESC_RIGHT_FRONT_VERT.write(105);
+		ESC_LEFT_FRONT_VERT.write(105);
+		ESC_RIGHT_BACK_VERT.write(105);
+		ESC_LEFT_BACK_VERT.write(105);
+		ESC_RIGHT_HORIZ.write(stopMotor);
+		ESC_LEFT_HORIZ.write(stopMotor);
+		state = 'k';
+	}
 
 }
 
