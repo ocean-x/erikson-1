@@ -1,3 +1,17 @@
+/*
+OCEANX SENSOR DEBUGGING SYSTEM –
+Tested with Arduino Mega 2560
+
+X Axis pointing forward
+Y Axis pointing to the right
+Z Axis pointing down
+Positive pitch: nose up
+Positive roll: right wing down
+Positive yaw: clockwise
+
+TODO: 
+
+*/
 #include <Wire.h>
 #include <Servo.h>
 #include "NAxisMotion.h" // Bridge code between API and Arduino Environment

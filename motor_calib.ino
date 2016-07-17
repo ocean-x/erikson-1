@@ -4,19 +4,12 @@ Tested with Arduino Mega 2560
 
 Turn on the serial monitor for this to work
 
-X Axis pointing forward
-Y Axis pointing to the right
-Z Axis pointing down
-Positive pitch: nose up
-Positive roll: right wing down
-Positive yaw: clockwise
+The PWM signal read by an ESC is the same as a servo signal.
+So we can use the servo library to make it work.
+The default signal range for most servos and ESCs is a high signal width between 1000 and 2000
+microseconds. 
 
-TODO: Program motion functions
-			Add sensor code (once it's been debugged in a separate sketch)
-			Start coding Python script
-			Test sensors and add them to the main sketch
-			Do we want leak detection or not?
-			Yes let's start by creating a python file
+TODO: Calibrate ESCs
 
 */
 
