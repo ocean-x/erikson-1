@@ -56,6 +56,10 @@ const int waterdetectPin = 3;
 const int pressurePin =4;
 const int internaltemperaturePin = 2;
 
+long timer = 0; //general purpose timer
+int state = ' ';
+int waterlevel = 0; //for waterDetect
+
 void setup() {
 	Serial.begin(115200);
 
@@ -70,6 +74,7 @@ void setup() {
 	ESC_RIGHT_FRONT_VERT.attach(ESC_RIGHT_FRONT_VERT_PIN, 1000, 2000);
 	ESC_RIGHT_BACK_VERT.attach(ESC_RIGHT_BACK_VERT_PIN, 1000, 2000);
 	stopALL();
+	detectWater();
 
 	Serial.println("OCEANX CONTROL SYSTEM");
 	Serial.println("Please place ROV on a flat surface");
@@ -167,7 +172,7 @@ void loop() {
 			case 'i' : toggleLights();
 				break;
 
-			case 's' : stopALL();
+			case ' ' : stopALL();
 				break;
 
 			case 't' : tiltUp();
@@ -237,8 +242,8 @@ void stopALL() {
 }
 
 void detectWater() {
-	int waterlevel = analogRead(waterdetectPin);
-	if (waterlevel > 400) {
+	waterlevel = analogRead(waterdetectPin);
+	if (waterlevel > 400) { // judgement variable for water detection
 		digitalWrite(lightPin, HIGH);
 		ascend();
 		Serial.prinln("LEAK DETECTED! ABORTING.")
