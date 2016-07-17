@@ -63,7 +63,7 @@ int LFstop = 93;
 int stopMotor = 96;
 
 int turningSpeed = 25;
-int forwardSpeedIncrement = 5;
+int horizontalSpeedIncrement = 5;
 int speedIncrement = 2;
 int speedAdjustment = 1;
 int speedDecrease = 1;
@@ -203,8 +203,8 @@ void loop() {
 
 void forward() {
 	if (state == 'w') {
-		go_l = go_l + forwardSpeedIncrement;
-		go_r = go_r + forwardSpeedIncrement;
+		go_l = go_l + horizontalSpeedIncrement;
+		go_r = go_r + horizontalSpeedIncrement;
 		//ESC_LEFT_BACK_VERT.write(LFstop);
 		//ESC_LEFT_FRONT_VERT.write(stopMotor);
 		//ESC_RIGHT_BACK_VERT(stopMotor);
@@ -226,6 +226,9 @@ void forward() {
 }
 
 void backward() {
+	if (state == 's') {
+
+	}
 
 }
 
