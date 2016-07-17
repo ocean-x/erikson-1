@@ -51,6 +51,11 @@ const int tempPin = 4;
 const int pHPin = 5;
 boolean lightEnable = false;
 
+//internal sensors
+const int waterdetectPin = 3;
+const int pressurePin =4;
+const int internaltemperaturePin = 2;
+
 void setup() {
 	Serial.begin(115200);
 
@@ -228,5 +233,17 @@ void toggleLights() {
 //this function stops all motors
 void stopALL() {
 	Serial.println("STOPPING ALL MOTORS!");
+
+}
+
+void detectWater() {
+	int waterlevel = analogRead(waterdetectPin);
+	if (waterlevel > 400) {
+		digitalWrite(lightPin, HIGH);
+		ascend();
+		Serial.prinln("LEAK DETECTED! ABORTING.")
+	} else {
+		delay(100);
+	}
 
 }
