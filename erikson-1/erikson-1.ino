@@ -291,27 +291,47 @@ void ascend() {
 
 void turnLeft() {
 	if (state == 'a') {
-
+    ESC_LEFT_HORIZ.write(82);
+    ESC_RIGHT_HORIZ.write(120);
 	} else {
-
+    ESC_LEFT_HORIZ.write(82);
+    ESC_RIGHT_HORIZ.write(110);
+    state='l';
 	}
 
 }
 
 void turnRight() {
 	if (state == 'd') {
-
+    ESC_LEFT_HORIZ.write(120);
+    ESC_RIGHT_HORIZ.write(82);
 	} else {
-		
+		ESC_LEFT_HORIZ.write(110);
+    ESC_RIGHT_HORIZ.write(82);
+    state= 'd';
 	}
 
 }
 
 void tiltUp() {
+	ESC_LEFT_HORIZ.write(STOP_MOTOR);
+  ESC_RIGHT_HORIZ.write(STOP_MOTOR);
+
+  ESC_LEFT_FRONT_VERT.write(70);
+  ESC_RIGHT_FRONT_VERT.write(70);
+  ESC_LEFT_BACK_VERT.write(STOP_MOTOR);
+  ESC_RIGHT_BACK_VERT.write(STOP_MOTOR);
 
 }
 
 void tiltDown() {
+	ESC_LEFT_HORIZ.write(STOP_MOTOR);
+  ESC_RIGHT_HORIZ.write(STOP_MOTOR);
+
+  ESC_LEFT_FRONT_VERT.write(115);
+  ESC_RIGHT_FRONT_VERT.write(115);
+  ESC_LEFT_BACK_VERT.write(STOP_MOTOR);
+  ESC_RIGHT_BACK_VERT.write(STOP_MOTOR);
 
 }
 
