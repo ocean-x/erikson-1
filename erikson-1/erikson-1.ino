@@ -202,6 +202,26 @@ void loop() {
 
 
 void forward() {
+	if (state == 'w') {
+		go_l = go_l + forwardSpeedIncrement;
+		go_r = go_r + forwardSpeedIncrement;
+		//ESC_LEFT_BACK_VERT.write(LFstop);
+		//ESC_LEFT_FRONT_VERT.write(stopMotor);
+		//ESC_RIGHT_BACK_VERT(stopMotor);
+		//ESC_RIGHT_FRONT_VERT(stopMotor);
+		ESC_LEFT_HORIZ.write(go_l);
+		ESC_RIGHT_HORIZ.write(go_r);
+	} else {
+		go_l = 111; // CALIBRATE!!!
+		go_r = 113; // TODO
+		ESC_LEFT_HORIZ.write(go_l);
+		ESC_RIGHT_HORIZ.write(go_r);
+		//ESC_LEFT_BACK_VERT.write(LFstop);
+		//ESC_LEFT_FRONT_VERT.write(stopMotor);
+		//ESC_RIGHT_BACK_VERT(stopMotor);
+		//ESC_RIGHT_FRONT_VERT(stopMotor);
+		state = 'w';
+	}
 
 }
 
