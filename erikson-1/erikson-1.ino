@@ -9,12 +9,12 @@ Positive pitch: nose up
 Positive roll: right wing down
 Positive yaw: clockwise
 
-TODO: Program motion functions
-			Add sensor code (once it's been debugged in a separate sketch)
-			Start coding Python script
-			Test sensors and add them to the main sketch
-			Do we want leak detection or not?
-			Yes let's start by creating a python file
+TODO: 1. 9 axis motion shield euler angles and compass
+      2. internal temperature, humidity and pressure
+			3. external temperature
+			4. external pH
+			5. camera
+			6. python script (set up raspberry pi)
 
 */
 
@@ -22,6 +22,11 @@ TODO: Program motion functions
 #include <Wire.h>
 #include <Servo.h>
 #include "NAxisMotion"
+
+int roll;
+int pitch;
+int yaw;
+int SENSOR_SIGN[9]{1, 1, 1, -1, -1, -1, 1, 1, 1};
 
 //constants, might need to find a more elegant solution using arrays
 Servo ESC_LEFT_HORIZ;
@@ -53,7 +58,7 @@ boolean lightEnable = false;
 
 //internal sensors
 const int waterdetectPin = 3;
-const int pressurePin =4;
+const int pressurePin = 4;
 const int internaltemperaturePin = 2;
 
 
@@ -99,7 +104,7 @@ void setup() {
 	Serial.println("Welcome to OceanX!");
 	Serial.println("Enter a command!");
 	Serial.println("Keyboard (Xbox controller functionality will come later):");
-	Serial.println("I - Ascend");
+	Serial.println("I  - Ascend");
 	Serial.println("K - Descend");
 	Serial.println("W - Forward");
 	Serial.println("A – Rotate Left");
@@ -196,6 +201,45 @@ void loop() {
 				break;
 
 		}
+	}
+
+	if (timer - lastStreamTime >= streamPeriod) {
+		lastStreamTime = timer;
+		ROVSensor.updateEuler();
+		ROVSensor.updateCalibStatus();
+
+		Serial.print("Time: ");
+    Serial.print(lastStreamTime);
+    Serial.print("ms ");
+
+    Serial.print(" Yaw: ");
+		yaw = ROVSensor.readEulerHeading();
+    Serial.print(mySensor.readEulerHeading()); //Heading data
+    Serial.print("deg ");
+
+    Serial.print(" Roll: ");
+		roll = ROVSensor.readEulerRoll();
+    Serial.print(mySensor.readEulerRoll()); //Roll data
+    Serial.print("deg");
+
+    Serial.print(" Pitch: ");
+		pitch = ROVSensor.readEulerPitch();
+    Serial.print(mySensor.readEulerPitch()); //Pitch data
+    Serial.print("deg ");
+
+    Serial.print(" A: ");
+    Serial.print(mySensor.readAccelCalibStatus());  //Accelerometer Calibration Status (0 - 3)
+
+    Serial.print(" M: ");
+    Serial.print(mySensor.readMagCalibStatus());    //Magnetometer Calibration Status (0 - 3)
+
+    Serial.print(" G: ");
+    Serial.print(mySensor.readGyroCalibStatus());   //Gyroscope Calibration Status (0 - 3)
+
+    Serial.print(" S: ");
+    Serial.print(mySensor.readSystemCalibStatus());   //System Calibration Status (0 - 3)
+
+    Serial.println();
 	}
 
 }
@@ -352,7 +396,7 @@ void toggleLights() {
 //this function stops all motors
 void stopALL() {
 	Serial.println("STOPPING ALL MOTORS!");
-	state='n';
+	state=' ';
   go_l=113;
   go_r=113;
   ESC_LEFT_HORIZ.write(stopMotor);
