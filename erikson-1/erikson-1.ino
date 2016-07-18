@@ -26,6 +26,7 @@ TODO: 1. 9 axis motion shield euler angles and compass
 int roll;
 int pitch;
 int yaw;
+float magHeading;
 int SENSOR_SIGN[9]{1, 1, 1, -1, -1, -1, 1, 1, 1};
 
 //constants, might need to find a more elegant solution using arrays
@@ -207,7 +208,7 @@ void loop() {
 		lastStreamTime = timer;
 		ROVSensor.updateEuler();
 		ROVSensor.updateCalibStatus();
-		compassHeading();
+		compassHeading(); //compass haha wtf
 
 		Serial.print("Time: ");
     Serial.print(lastStreamTime);
