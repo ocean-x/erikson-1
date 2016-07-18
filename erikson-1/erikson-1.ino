@@ -23,10 +23,11 @@ TODO: 1. 9 axis motion shield euler angles and compass
 #include <Servo.h>
 #include <NAxisMotion.h>
 
-int roll;
-int pitch;
-int yaw;
-float magHeading;
+float roll;
+float pitch;
+float yaw;
+float heading;
+float initHeading;
 int SENSOR_SIGN[9]{1, 1, 1, -1, -1, -1, 1, 1, 1};
 
 //constants, might need to find a more elegant solution using arrays
@@ -94,15 +95,25 @@ void setup() {
 	stopALL();
 	detectWater();
 
-	Serial.println("OCEANX CONTROL SYSTEM");
-	Serial.println("Please place ROV on a flat surface");
-	delay(1000);
-
 	I2C.begin(); //for the 9-axis motion sensor?
 	delay(2000);
+	ROVSensor.initSensor();
+	ROVSensor.setOperationMode(OPERATION_MODE_NDOF); // or 0x0C, can be set to debug
+	ROVSensor.setUpdateMode(MANUAL); //default is auto, manual has to update function before read function
+	//manual has lesser reads to sensor
+
+	Serial.println("OCEANX CONTROL SYSTEM");
+	Serial.println("Please rotate ROV for the next 10 seconds");
+	while (millis() < 10000) {
+		ROVSensor.updateEuler();        //Update the Euler data into the structure of the object
+    ROVSensor.updateCalibStatus();  //Update the Calibration Status
+    initHeading = ROVSensor.readEulerHeading();
+	}
+	delay(1000);
 
 	//displaying the keyboard mappings
 	Serial.println("Welcome to OceanX!");
+	Serial.println("Place ROV on a flat surface facing away from you");
 	Serial.println("Enter a command!");
 	Serial.println("Keyboard (Xbox controller functionality will come later):");
 	Serial.println("I  - Ascend");
@@ -119,10 +130,6 @@ void setup() {
 
 
 	//initialise the three sensors here
-	ROVSensor.initSensor();
-	ROVSensor.setOperationMode(OPERATION_MODE_NDOF); // or 0x0C, can be set to debug
-	ROVSensor.setUpdateMode(MANUAL); //default is auto, manual has to update function before read function
-	//manual has lesser reads to sensor
 	ROVSensor.updateAccelConfig();
   updateSensorData = true;
   Serial.println();
@@ -140,6 +147,10 @@ void setup() {
   delay(1000);	//Wait for a second
   Serial.println("1...");
   delay(1000);	//Wait for a second
+	initHeading = ROVSensor.readEulerHeading();
+	Serial.print("Initial heading is ");
+	Serial.print(initHeading);
+	delay(1000);
 
 	digitalWrite(lightPin, LOW); //turning the light off becuase we've tested it I guess?
 
@@ -147,7 +158,7 @@ void setup() {
 
 	timer = millis(); //remember to declare that such a thing exists
 	delay(20);
-	counter = 0;
+	int counter = 0;
 
 }
 
@@ -187,7 +198,7 @@ void loop() {
 				Serial.println("Turning right");
 				break;
 
-			case 'i' : toggleLights();
+			case 'l' : toggleLights();
 				break;
 
 			case ' ' : stopALL();
@@ -208,16 +219,20 @@ void loop() {
 		lastStreamTime = timer;
 		ROVSensor.updateEuler();
 		ROVSensor.updateCalibStatus();
-		compassHeading(); //compass haha wtf
 
 		Serial.print("Time: ");
     Serial.print(lastStreamTime);
     Serial.print("ms ");
 
-    Serial.print(" Yaw: ");
-		yaw = ROVSensor.readEulerHeading();
+    Serial.print(" Heading: ");
+		heading = ROVSensor.readEulerHeading();
     Serial.print(ROVSensor.readEulerHeading()); //Heading data
     Serial.print("deg ");
+
+		Serial.print(" Yaw: ");
+		yaw = initHeading - heading;
+		Serial.print(yaw);
+		Serial.print("deg");
 
     Serial.print(" Roll: ");
 		roll = ROVSensor.readEulerRoll();
@@ -228,10 +243,6 @@ void loop() {
 		pitch = ROVSensor.readEulerPitch();
     Serial.print(ROVSensor.readEulerPitch()); //Pitch data
     Serial.print("deg ");
-
-		Serial.print("Heading: ");
-		Serial.print(magHeading); //Compass heading data
-		Serial.print("deg ");
 
     Serial.print(" A: ");
     Serial.print(ROVSensor.readAccelCalibStatus());  //Accelerometer Calibration Status (0 - 3)
@@ -420,7 +431,7 @@ void detectWater() {
 	if (waterlevel > 400) { // judgement variable for water detection
 		digitalWrite(lightPin, HIGH);
 		ascend();
-		Serial.println("LEAK DETECTED! ABORTING.")
+		Serial.println("LEAK DETECTED! ABORTING.");
 	} else {
 		delay(100);
 	}
@@ -432,13 +443,5 @@ void detectTemperature() {
 }
 
 void detectPH() {
-
-}
-
-void compassHeading() {
-  float MAG_X = ROVSensor.readMagX();
-  float MAG_Y = ROVSensor.readMagX();
-
-  magHeading = atan2(-MAG_Y,MAG_X);
 
 }
