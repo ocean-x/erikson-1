@@ -21,7 +21,7 @@ TODO: 1. 9 axis motion shield euler angles and compass
 //libraries
 #include <Wire.h>
 #include <Servo.h>
-#include "NAxisMotion"
+#include <NAxisMotion.h>
 
 int roll;
 int pitch;
@@ -122,16 +122,16 @@ void setup() {
 	ROVSensor.setOperationMode(OPERATION_MODE_NDOF); // or 0x0C, can be set to debug
 	ROVSensor.setUpdateMode(MANUAL); //default is auto, manual has to update function before read function
 	//manual has lesser reads to sensor
-	mySensor.updateAccelConfig();
+	ROVSensor.updateAccelConfig();
   updateSensorData = true;
   Serial.println();
   Serial.println("Default accelerometer configuration settings...");
   Serial.print("Range: ");
-  Serial.println(mySensor.readAccelRange());
+  Serial.println(ROVSensor.readAccelRange());
   Serial.print("Bandwidth: ");
-  Serial.println(mySensor.readAccelBandwidth());
+  Serial.println(ROVSensor.readAccelBandwidth());
   Serial.print("Power Mode: ");
-  Serial.println(mySensor.readAccelPowerMode());
+  Serial.println(ROVSensor.readAccelPowerMode());
   Serial.println("Streaming in ...");	//Countdown
   Serial.print("3...");
   delay(1000);	//Wait for a second
@@ -207,6 +207,7 @@ void loop() {
 		lastStreamTime = timer;
 		ROVSensor.updateEuler();
 		ROVSensor.updateCalibStatus();
+		compassHeading();
 
 		Serial.print("Time: ");
     Serial.print(lastStreamTime);
@@ -214,30 +215,34 @@ void loop() {
 
     Serial.print(" Yaw: ");
 		yaw = ROVSensor.readEulerHeading();
-    Serial.print(mySensor.readEulerHeading()); //Heading data
+    Serial.print(ROVSensor.readEulerHeading()); //Heading data
     Serial.print("deg ");
 
     Serial.print(" Roll: ");
 		roll = ROVSensor.readEulerRoll();
-    Serial.print(mySensor.readEulerRoll()); //Roll data
-    Serial.print("deg");
+    Serial.print(ROVSensor.readEulerRoll()); //Roll data
+    Serial.print("deg ");
 
     Serial.print(" Pitch: ");
 		pitch = ROVSensor.readEulerPitch();
-    Serial.print(mySensor.readEulerPitch()); //Pitch data
+    Serial.print(ROVSensor.readEulerPitch()); //Pitch data
     Serial.print("deg ");
 
+		Serial.print("Heading: ");
+		Serial.print(magHeading); //Compass heading data
+		Serial.print("deg ");
+
     Serial.print(" A: ");
-    Serial.print(mySensor.readAccelCalibStatus());  //Accelerometer Calibration Status (0 - 3)
+    Serial.print(ROVSensor.readAccelCalibStatus());  //Accelerometer Calibration Status (0 - 3)
 
     Serial.print(" M: ");
-    Serial.print(mySensor.readMagCalibStatus());    //Magnetometer Calibration Status (0 - 3)
+    Serial.print(ROVSensor.readMagCalibStatus());    //Magnetometer Calibration Status (0 - 3)
 
     Serial.print(" G: ");
-    Serial.print(mySensor.readGyroCalibStatus());   //Gyroscope Calibration Status (0 - 3)
+    Serial.print(ROVSensor.readGyroCalibStatus());   //Gyroscope Calibration Status (0 - 3)
 
     Serial.print(" S: ");
-    Serial.print(mySensor.readSystemCalibStatus());   //System Calibration Status (0 - 3)
+    Serial.print(ROVSensor.readSystemCalibStatus());   //System Calibration Status (0 - 3)
 
     Serial.println();
 	}
@@ -426,5 +431,13 @@ void detectTemperature() {
 }
 
 void detectPH() {
+
+}
+
+void compassHeading() {
+  float MAG_X = ROVSensor.readMagX();
+  float MAG_Y = ROVSensor.readMagX();
+
+  magHeading = atan2(-MAG_Y,MAG_X);
 
 }
