@@ -357,7 +357,7 @@ void turnLeft() {
 	} else {
     ESC_LEFT_HORIZ.write(82);
     ESC_RIGHT_HORIZ.write(110);
-    state='l';
+    state= 'l';
 	}
 
 }

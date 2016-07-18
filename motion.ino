@@ -72,7 +72,6 @@ void setup() //This code is executed once
     mySensor.updateEuler();        //Update the Euler data into the structure of the object
     mySensor.updateCalibStatus();  //Update the Calibration Status
     initHeading = mySensor.readEulerHeading();
-    Serial.println(initHeading);
   }
   Serial.println("Please place ROV on a flat surface facing away from you");
 
