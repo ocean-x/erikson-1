@@ -148,6 +148,7 @@ void setup() {
   Serial.println("1...");
   delay(1000);	//Wait for a second
 	initHeading = ROVSensor.readEulerHeading();
+  int oppositeHeading = opposite(initHeading); // for checking of direction to calibrate the compass.
 	Serial.print("Initial heading is ");
 	Serial.print(initHeading);
 	delay(1000);
@@ -230,7 +231,13 @@ void loop() {
     Serial.print("deg ");
 
 		Serial.print(" Yaw: ");
-		yaw = initHeading - heading;
+    if (initHeading<=180) { // I just thought it was fun to code a solution
+            yaw = lesserThan(initHeading, heading, oppositeHeading);
+        }
+        else {
+            yaw = moreThan(initHeading, heading, oppositeHeading);
+        }
+		//yaw = initHeading - heading;
 		Serial.print(yaw);
 		Serial.print("deg");
 
@@ -452,3 +459,39 @@ void detectPH() {
 
 
 }
+
+float opposite (float x){ // function to find the opposite angle
+    x=+180;
+    if (x>=360) {
+        x=-360
+    }
+    return x;
+}
+
+float lesserThan (float initHeading, float heading, float oppositeHeading){
+    if (oppositeHeading == 0) {
+        oppositeHeading = 360;
+    }
+    if (initHeading >= heading) {
+        return (initHeading - heading)*(-1);
+    }
+    else if (heading > initHeading && heading <= oppositeHeading){
+        return (heading - initHeading);
+    }
+    else{
+        return (360 - heading + initHeading);
+    }
+}
+
+float moreThan (float initHeading, float heading, float oppositeHeading){
+    if (initHeading > heading && heading >= oppositeHeading){
+        return (initHeading - heading)*(-1);
+    }
+    else if (heading > initHeading){
+        return (heading - initHeading);
+    }
+    else {
+        return (360 + heading - initHeading);
+    }
+}
+
