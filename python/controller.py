@@ -27,4 +27,22 @@ gradtorad = 3.141592/180.0
 ser = serial.Serial(port = 'COM16', baudrate = 15200)
 
 # Main scene
- 
+scene = display(title = "OCEANX ROV")
+scene.range = (1.2, 1.2, 1.2)
+scene.forward = (1, 0, -0.25)
+scene.up = (0, 0, 1)
+
+#Second scene (display of roll, pitch and yaw)
+scene2 = display(title = "OCEANX ROV", x = 0, y = 0, width = 500, height = 200, center = (0,0,0), background = (0,0,0))
+scene2.range = (1, 1, 1)
+scene.width = 500
+scene.y = 200
+
+scene3 = display(title = 'Control Panel', x = 0, y =0, width = 500, height = 200, center = (0,0,0), background = (0,0,0))
+scene3.range(1, 1, 1)
+
+scene2.select()
+
+#Meters for roll, pitch and yaw)
+cil_roll = cylinder(pos=(-0.4,0,0),axis=(0.2,0,0),radius=0.01,color=color.red)
+cil_roll2 = cylinder(pos=(-0.4,0,0),axis=(-0.2,0,0),radius=0.01,color=color.red)  
