@@ -262,8 +262,7 @@ void loop() {
     Serial.print(ROVSensor.readMagCalibStatus());    //Magnetometer Calibration Status (0 - 3)
 
     Serial.print(" G: ");
-    Serial.print(ROVSensor.readGyroCalibStatus());   //Gyroscope Calibration Status (0 - 3)
-
+    Serial.print(ROVSensor.readGyroCalibStatus());   //Gyroscope Calibration Status (0 - 3);
     Serial.print(" S: ");
     Serial.print(ROVSensor.readSystemCalibStatus());   //System Calibration Status (0 - 3)
 
@@ -449,7 +448,7 @@ void detectWater() {
 
 }
 
-void detectTemperature() {
+float detectTemperature() {
 	templevel = analogRead(tempdetectPin);
 	return templevel;
 
