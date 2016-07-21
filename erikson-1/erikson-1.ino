@@ -244,6 +244,10 @@ void loop() {
     Serial.print(ROVSensor.readEulerPitch()); //Pitch data
     Serial.print("deg ");
 
+		Serial.print(" Temperature: ");
+		Serial.print(detectTemperature());
+		Serial.print("deg C");
+
     Serial.print(" A: ");
     Serial.print(ROVSensor.readAccelCalibStatus());  //Accelerometer Calibration Status (0 - 3)
 
@@ -440,8 +444,11 @@ void detectWater() {
 
 void detectTemperature() {
 	templevel = analogRead(tempdetectPin);
+	return templevel;
+
 }
 
 void detectPH() {
+
 
 }
