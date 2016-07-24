@@ -26,7 +26,9 @@ void setup() {
 
   lcd.begin(16, 2);
   lcd.home ();
-  lcd.print("OCEANX CONTROL SYSTEM");
+  lcd.print("OCEANX CONTROL");
+  lcd.setCursor(0,1);
+  lcd.print("HELLO");
   delay(4000);
 
   for (int a = 0; a < 4; a++)
@@ -57,13 +59,4 @@ void loop() {
   escVertical2.write(output[2]);
   escVertical3.write(output[2]);
   escVertical4.write(output[2]);
-
-  lcd.print("SIGNAL IN: ");
-  lcd.print(input[1]);
-  lcd.print(" ");
-  lcd.print("SIGNAL OUT: ");
-  lcd.print(output[1]);
-  lcd.print(" ");
-  lcd.println();
-
 }
