@@ -45,15 +45,10 @@ void setup() {
   escVertical2.attach(verticalmotors[1]);
   escVertical3.attach(verticalmotors[2]);
   escVertical4.attach(verticalmotors[3]);
-
->>>>>>> 96edc13c0760495aef95dcdf54d37be26520910d
 }
 
 void loop() {
 
-<<<<<<< HEAD
-
-=======
   for (int a = 0; a < 3; ++a) {
     input[a] = analogRead(controls[a]);
     output[a] = map(input[a], 0, 1023, 700, 2000);
@@ -65,5 +60,4 @@ void loop() {
   escVertical2.write(output[2]);
   escVertical3.write(output[2]);
   escVertical4.write(output[2]);
->>>>>>> 96edc13c0760495aef95dcdf54d37be26520910d
 }
