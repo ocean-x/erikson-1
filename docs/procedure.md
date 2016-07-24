@@ -32,7 +32,11 @@ We chose a lithium polymer battery because of its high charge density; our two b
 
 ### Arduino Mega 2560
 The Arduino will execute the code to operate the 6 motors.
+The Arduino provides a low-level C runtime to control the 6 motors. There is a wide range of shields and compatible sensors for this platform, and it can be scaled up to communicate with an onboard computer such as a Raspberry Pi for future navigation and observation, which include a camera and GPS. 
 
 ### Motors
-The 9-axis motor driver board navigation telemetry, 
-which are the accelerometer, gyroscope and magnetometer. 
+We chose brushless direct current (BLDC) motors for a few reasons. Firstly, carbon brushes wear out over time, and eliminating the brushes would make the ROV’s operation more reliable. Secondly, carbon brushes would short underwater, the use of a spinning magnetic field to drive a BLDC means that it can function in an aquatic medium without waterproofing. 
+
+
+
+
