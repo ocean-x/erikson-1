@@ -1,1 +1,9 @@
 Before the purchase of materials, there were some calculation made to ensure all the parts fits together perfectly. For example, there was the calculation for upward thrust using the Archimedes Principle that thrust = acceleration due to gravity x Volume of the displaced fluid x (density of fluid - density of body). To avoid the turning effect while travelling in a straight line, the two forward motors are place alingh in a horizontal line to the centre of mass. The use of silicone sealant is because it can withstand high acidic and basic chemical and able to be easily curved to fit into the desired shapes to seal the gaps.
+
+
+## Written on 23/07/2016 (see below)
+
+Before the purchase of materials, calculations were made to ensure that the functionality of the parts would fit well to our ROV. For example, there was the calculation for upward thrust using the Archimedes’ Principle that thrust = acceleration due to gravity x volume of the displaced fluid x density of fluid. From the calculation, we have estimated the minimum size required for our enclosed PVC pipe. 
+
+To avoid the turning effect while travelling in a straight line, the two forward motors were located along the horizontal line of the centre of mass and were evenly spaced apart from it as well. The four downward motors were placed along the centre of the acrylic plates at the four corners for even descent and tilting of the ROV. To increase the waterproofing of our capsule, suitable silicone sealant and rubber o-ring were chosen to 
+seal all possible leakages of our ROV. Our project will provide an alternative mean of convenient monitoring of underwater data such as pH level and water temperature, which are the two factors that contribute to algal bloom. From our research, we have found out that warm environment and increase in pH level could cause eutrophication leading to algal bloom (University of Maryland Centre for Environmental Science, PNG file)
