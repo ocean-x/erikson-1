@@ -7,3 +7,9 @@ exposure level and dissovled oxygen level in the water. All this will proide mor
 Our preliminary design of the ROV enabled us to have a device that can monitor the pH level and temperature of the water at a frequent rate with little manpower and cost incurred compared to existing measures. 
 
 Future development would be to add on more sensors to the Arduino ports (test salinity, turbidity, dissolved oxygan level), programmed the ROV to navigate through the water autonomously, remotely control our ROV by connecting the Arduino board to the Raspberry Pi, etc.
+
+## Written on 24 July (see below)
+Our preliminary design of the ROV enabled us to have a device that can monitor the pH level and temperature of the water at a frequent rate with little manpower and cost incurred compared to existing measures. 
+
+
+
