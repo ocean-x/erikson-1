@@ -53,4 +53,12 @@ subroutines that aid the recovery of the vessel, or the data collected by it, as
 soon as a structural failure has been detected. 
 
 The elimination of a tether and establishing wireless connectivity is a
-difficult task, but will signify our ability to pitch the product to clients.  
+difficult task, but will signify our ability to pitch the product to clients. 
+
+### Camera
+
+### GPS and depth 
+
+### Industrial waterproofing
+
+### Control systems 
