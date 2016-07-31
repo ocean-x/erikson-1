@@ -56,9 +56,16 @@ The elimination of a tether and establishing wireless connectivity is a
 difficult task, but will signify our ability to pitch the product to clients. 
 
 ### Camera
+A camera will be a great improvement. This is what turns mere data collection into something truly remote with observation capabilities. However, if we do not have a tether, another challenge remains. We have no idea how to stream the camera feed from an underwater location. We could do something wireless and have the feed hosted on a nodejs webserver, but that would take more resources and expertise than I have at the current moment. 
+
 
 ### GPS and depth 
+Here is something that I admit we've overlooked. In large water bodies, the
+depth of the water is very important when discussing data collection. This is
+because the amount of sunlight that reaches various depths will affect the organisms living and photosynthesizing at particular regions. This will play a large role in influencing the living conditions which have to be detected. 
+
+As such, before we can talk about pitching our project as a serious engineering contender, we have to work on the robustness of basic navigation and longevity in harsh conditions.
 
 ### Industrial waterproofing
 
-### Control systems 
+## Control systems 
