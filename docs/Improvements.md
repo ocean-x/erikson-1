@@ -67,5 +67,15 @@ because the amount of sunlight that reaches various depths will affect the organ
 As such, before we can talk about pitching our project as a serious engineering contender, we have to work on the robustness of basic navigation and longevity in harsh conditions.
 
 ### Industrial waterproofing
+I hate to break it to you, but the fact of the matter is no one is going to buy
+into the idea of a submarine being held together by acrylic and silicone rubber.
+What would make the difference from here on is sadly money and expertise.
+Eventually, we will have to move to more exotic and expensive materials instead
+of mere acrylic. Our industrial design will have to be many times more
+meticulous. 
 
-## Control systems 
+### Control systems
+We'll need to learn how to code system-critical software to actually run the
+ROV. Eventually, this will have to be done reliably. Fat hope getting this
+section done by the end of this year, this may take up to a few years to learn
+enough before implementation.
